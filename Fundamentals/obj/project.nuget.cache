@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "is4cKjan1NY=",
+  "dgSpecHash": "UrUPhE4LfB1QaGeucgKG8hEetuDxcDPvMigjeW2fpUyDdK/MxdxnmYIik0lxekbxvdHHwSghC8KrRFh8VyPfZg==",
   "success": true,
-  "projectFilePath": "/Users/benfield/CSharp_Accelerator/Fundamentals/Fundamentals.csproj",
+  "projectFilePath": "/home/bfield/csharp-accelerator/Fundamentals/Fundamentals.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
