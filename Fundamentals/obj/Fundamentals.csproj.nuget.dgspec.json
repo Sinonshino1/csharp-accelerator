@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/bfield/csharp-accelerator/Fundamentals/Fundamentals.csproj": {}
+    "/Users/benfield/CSharp_Accelerator/Fundamentals/Fundamentals.csproj": {}
   },
   "projects": {
-    "/home/bfield/csharp-accelerator/Fundamentals/Fundamentals.csproj": {
+    "/Users/benfield/CSharp_Accelerator/Fundamentals/Fundamentals.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/bfield/csharp-accelerator/Fundamentals/Fundamentals.csproj",
+        "projectUniqueName": "/Users/benfield/CSharp_Accelerator/Fundamentals/Fundamentals.csproj",
         "projectName": "Fundamentals",
-        "projectPath": "/home/bfield/csharp-accelerator/Fundamentals/Fundamentals.csproj",
-        "packagesPath": "/home/bfield/.nuget/packages/",
-        "outputPath": "/home/bfield/csharp-accelerator/Fundamentals/obj/",
+        "projectPath": "/Users/benfield/CSharp_Accelerator/Fundamentals/Fundamentals.csproj",
+        "packagesPath": "/Users/benfield/.nuget/packages/",
+        "outputPath": "/Users/benfield/CSharp_Accelerator/Fundamentals/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/bfield/.nuget/NuGet/NuGet.Config"
+          "/Users/benfield/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -32,6 +32,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -53,7 +58,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.123/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.418/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

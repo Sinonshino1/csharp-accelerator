@@ -46,7 +46,7 @@ class Program      // Creates the Program class, which is used as an entry point
         string name = Console.ReadLine();   // creates a variable with type string which reads the written line on the terminal, which in this context is the users input for the name variable
 
         Console.Write("Enter age: ");       //Writes this line to the terminal
-        int age = int.Parse(console.Readline());       // creates a new variable of type int, I do not currently understand how it sets the value.
+        int age = int.Parse(Console.ReadLine());       // creates a new variable of type int, I do not currently understand how it sets the value.
 
         members.Add(new Member(name, age));             // Adds a new member to the members list using the name and age variable seen in this function above.
         Console.WriteLine("Member successfully added!");    // Verification for the user that the new member was added successfully
@@ -60,17 +60,17 @@ class Program      // Creates the Program class, which is used as an entry point
             return;
         }
 
-        foreach (var member in members)      // Iterates through the members list and runs the following code on each instance within the list
+        foreach (var member in members)      // Iterates through the members list and runs the following code on each instance within the list. Var used to infer the datatype as we have more than one datatype in the list
         {
-            Console.WriteLine(member)       // Writes the member object information to the terminal
+            Console.WriteLine(member);       // Writes the member object information to the terminal
         }
     }
 }
 
 class Member        // Creates the Member class, so we can have member objects to list in the other methods / store member objects
 {
-    public string Name { get; }     // Set a public scope, string variable called Name. I do not understand the { get; } part
-    public int Age { get; }     // Set a public scope, int variable called Age. Takes the string value submitted in the console and converts it to an int value.
+    public string Name { get; }     // Set a public scope, string property called Name. I do not understand the { get; } part
+    public int Age { get; }     // Set a public scope, int property called Age. Takes the string value submitted in the console and converts it to an int value.
 
     public Member(string name, int age)     // Set a public scope Object called Member with attributes name and int, with no methods
     {
@@ -78,8 +78,8 @@ class Member        // Creates the Member class, so we can have member objects t
         Age = age;
     }
 
-    public override string ToString()       // I do not understand this line
+    public override string ToString()       // Replaces the default ToString function
     {
-        return $"{Name}, Age {Age}";        // This is a return statement which prints to the terminal, with F strings being used to directly pull the objects attributes into the text
+        return $"{Name}, Age {Age}";        // This is a return statement the string, with F strings being used to directly pull the objects attributes into the text
     }
 }
