@@ -20,7 +20,7 @@ class Program      // Creates the Program class, which is used as an entry point
             Console.WriteLine("3. Exit");
             Console.Write("Select an option: ");
 
-            string input = Console.ReadLine();      // Create a variable called input with a string datatype equal to the output of Console.ReadLine
+            string input = (Console.ReadLine() ?? "").Trim();      // Create a variable called input with a string datatype equal to the output of Console.ReadLine, also has the ?? "".Trim() to deal with CS8600 warnings
 
             switch (input)     // Creating a switch statement to find the result for the input variable
             {
@@ -43,10 +43,26 @@ class Program      // Creates the Program class, which is used as an entry point
     static void AddMember()     // Creating the AddMember function
     {
         Console.Write("Enter name: ");      // Writes this line to the terminal
-        string name = Console.ReadLine();   // creates a variable with type string which reads the written line on the terminal, which in this context is the users input for the name variable
+        string name = (Console.ReadLine() ?? "").Trim();   // creates a variable with type string which reads the written line on the terminal, which in this context is the users input for the name variable
+                                                        // Added ?? "" .Trim() to deal with null values by only accepting non null values to deal with edge cases
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            Console.WriteLine("Name cannot be empty.");
+            return;
+        }
 
-        Console.Write("Enter age: ");       //Writes this line to the terminal
-        int age = int.Parse(Console.ReadLine());       // creates a new variable of type int, I do not currently understand how it sets the value.
+
+        int age;
+        while (true)
+        {
+            Console.Write("Enter age: ");       // Writes this line to the terminal 
+            string ageInput = (Console.ReadLine() ?? "").Trim();  // Reads the user input in the terminal and saves it in ageInput
+
+            if (int.TryParse(ageInput, out age) && age >= 0)  // Tries to Parse the string into an int, provided age >= 0
+            break;
+
+            Console.WriteLine("Please enter a valid age (0 or above).");    // Provides a custom error message to user stating they did not enter a valid age
+        }                                                            
 
         members.Add(new Member(name, age));             // Adds a new member to the members list using the name and age variable seen in this function above.
         Console.WriteLine("Member successfully added!");    // Verification for the user that the new member was added successfully
@@ -69,7 +85,7 @@ class Program      // Creates the Program class, which is used as an entry point
 
 class Member        // Creates the Member class, so we can have member objects to list in the other methods / store member objects
 {
-    public string Name { get; }     // Set a public scope, string property called Name. I do not understand the { get; } part
+    public string Name { get; }     // Set a public scope, string property called Name. The { get } means that it is a read only variable, nad can't be adjusted outside of the constructor
     public int Age { get; }     // Set a public scope, int property called Age. Takes the string value submitted in the console and converts it to an int value.
 
     public Member(string name, int age)     // Set a public scope Object called Member with attributes name and int, with no methods
