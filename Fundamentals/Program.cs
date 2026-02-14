@@ -1,11 +1,11 @@
 ﻿// IMPORTANT NOTE, C# REQUIRES LINES TO END WITH A SEMI COLON!!!
 
 using System;
-using System.Collections.Generic;   // Imports this so we can access the namespace in order to use specific funtions
+using System.Collections.Generic;   // Imports this so we can access the namespace in order to use specific functions
 
 class Program      // Creates the Program class, which is used as an entry point by the console application
 {
-    static List<Member> members = new List<Member>();       // creates a new, static list which can be accesssed by the whole program, static replaces Class instance name.
+    static MemberService memberService = new MemberService();       // Unsure
 
     static void Main(string[] args)         // Creating the overarching program which will be being run, args refers to command line arguments
 
@@ -64,12 +64,14 @@ class Program      // Creates the Program class, which is used as an entry point
             Console.WriteLine("Please enter a valid age (0 or above).");    // Provides a custom error message to user stating they did not enter a valid age
         }                                                            
 
-        members.Add(new Member(name, age));             // Adds a new member to the members list using the name and age variable seen in this function above.
+        memberService.AddMember(name, age);               // Unsure
         Console.WriteLine("Member successfully added!");    // Verification for the user that the new member was added successfully
     }
 
     static void ListMembers()      // Creating the ListMember function
     {
+        var members = memberService.GetAllMembers();
+
         if (members.Count == 0)     // Runs an if statement and checks if the amount of members in the members list is equal to 0
         {
             Console.WriteLine("No members found.");     // If the if statement is true, shows the text No members found. in the terminal
