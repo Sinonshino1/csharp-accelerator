@@ -5,11 +5,14 @@ using System.Collections.Generic;   // Imports this so we can access the namespa
 
 class Program      // Creates the Program class, which is used as an entry point by the console application
 {
-    static MemberService memberService = new MemberService();       // Unsure
+    // static MemberService memberService = new MemberService();       // Unsure        // Old code using static, now transitioned into using namespaces
 
     static void Main(string[] args)         // Creating the overarching program which will be being run, args refers to command line arguments
 
     {
+        var memberService = new MemberService();    // This creates a new variable object within the Program class called MemberService
+
+
         bool running = true;       // Create a bool variable and set it to true
 
         while (running)     // Whilst the running variable is set to true, the while loop is running
@@ -25,10 +28,10 @@ class Program      // Creates the Program class, which is used as an entry point
             switch (input)     // Creating a switch statement to find the result for the input variable
             {
                 case "1":
-                    AddMember();                    // Case 1 runs the AddMember function
+                    AddMember(memberService);                    // Case 1 runs the AddMember function
                     break;
                 case "2":
-                    ListMembers();                   // Case 2 runs the ListMember function
+                    ListMembers(memberService);                   // Case 2 runs the ListMember function
                     break;
                 case "3":
                     running = false;                // Case 3 sest the running variable to false, ending the while loop (closes the program)
@@ -36,11 +39,12 @@ class Program      // Creates the Program class, which is used as an entry point
                 default:
                     Console.WriteLine("Invalid option.");       // A default set to catch any error if user inputs anything which doesn't fit the expected results
                     break;
+                                                    // Added a memberService argument to each the AddMember and ListMember methods
             }
         }
     }
 
-    static void AddMember()     // Creating the AddMember function
+    static void AddMember(MemberService memberService)     // Creating the AddMember function, added the argument memberSerice after removing static
     {
         Console.Write("Enter name: ");      // Writes this line to the terminal
         string name = (Console.ReadLine() ?? "").Trim();   // creates a variable with type string which reads the written line on the terminal, which in this context is the users input for the name variable
@@ -68,7 +72,7 @@ class Program      // Creates the Program class, which is used as an entry point
         Console.WriteLine("Member successfully added!");    // Verification for the user that the new member was added successfully
     }
 
-    static void ListMembers()      // Creating the ListMember function
+    static void ListMembers(MemberService memberService)      // Creating the ListMember function, added the argument memberSerice after removing static
     {
         var members = memberService.GetAllMembers();
 
