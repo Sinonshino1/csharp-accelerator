@@ -1,3 +1,5 @@
+namespace GymMemberManager.Models;       // Creates the Models namespace, usually, the name takes after the .csproj name, however, Fundamentals is unclear context here
+
 public class Member        // Creates the Member class, so we can have member objects to list in the other methods / store member objects
 {                          // If being called from a public method, needs to have the same accessability, in this case public
     public string Name { get; }     // Set a public scope, string property called Name. The { get } means that it is a read only variable, nad can't be adjusted outside of the constructor

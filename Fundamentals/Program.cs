@@ -3,7 +3,12 @@
 using System;
 using System.Collections.Generic;   // Imports this so we can access the namespace in order to use specific functions
 
-class Program      // Creates the Program class, which is used as an entry point by the console application
+using GymMemberManager.Models;
+using GymMemberManager.Services;
+
+namespace GymMemberManager;     // Usually, the name takes after the .csproj name, however, Fundamentals is unclear context here
+
+internal class Program      // Creates the Program class, which is used as an entry point by the console application
 {
     // static MemberService memberService = new MemberService();       // Unsure        // Old code using static, now transitioned into using namespaces
 

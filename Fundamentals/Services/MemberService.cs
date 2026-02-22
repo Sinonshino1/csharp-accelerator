@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;    // Imported to access the namespace in order to use specific functions
                                      // Used for List and IReadOnlyList
+using GymMemberManager.Models;       // Provides access to the Models namespace
+
+namespace GymMemberManager.Services;  // Creates the Services namespace, // Usually, the name takes after the .csproj name, however, Fundamentals is unclear context here
 
 public class MemberService      // Create the MemberService class
 {
