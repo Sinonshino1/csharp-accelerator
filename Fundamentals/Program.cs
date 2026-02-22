@@ -54,13 +54,16 @@ internal class Program      // Creates the Program class, which is used as an en
         Console.Write("Enter name: ");      // Writes this line to the terminal
         string name = (Console.ReadLine() ?? "").Trim();   // creates a variable with type string which reads the written line on the terminal, which in this context is the users input for the name variable
                                                         // Added ?? "" .Trim() to deal with null values by only accepting non null values to deal with edge cases
+        /*
         if (string.IsNullOrWhiteSpace(name))
         {
             Console.WriteLine("Name cannot be empty.");
             return;
         }
+        */  //LEGACY CODE, validation happens in the Service now, not the UI
 
 
+        /*
         int age;
         while (true)
         {
@@ -71,11 +74,26 @@ internal class Program      // Creates the Program class, which is used as an en
             break;
 
             Console.WriteLine("Please enter a valid age (0 or above).");    // Provides a custom error message to user stating they did not enter a valid age
-        }                                                            
+        }   
+        */  // Legacy Code, validation now occurs on Service level
 
-        memberService.AddMember(name, age);               // Unsure
-        Console.WriteLine("Member successfully added!");    // Verification for the user that the new member was added successfully
-    }
+        Console.Write("Enter age: ");
+        if (!int.TryParse(Console.ReadLine(), out int age))
+        {
+            Console.WriteLine("Invalid age input.");
+            return;
+        }
+
+        try        // Adding a try catch clause to catch any errors and respond with the custom exceptions from MemberService
+        {
+            memberService.AddMember(name, age);               // Unsure
+            Console.WriteLine("Member successfully added!");    // Verification for the user that the new member was added successfully       
+        }
+        catch (ArgumentException ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");   // Prints our custom ArguementException to the console.
+        }
+    }       
 
     static void ListMembers(MemberService memberService)      // Creating the ListMember function, added the argument memberSerice after removing static
     {

@@ -9,9 +9,28 @@ public class MemberService      // Create the MemberService class
 {
     private readonly List<Member> _members = new();     // Create a new, private, read-only members list, meaning they cannot be reassigned to a new list, but can be modified
 
+    /*
     public void AddMember(string name, int age)     // Create a, public, AddMember method with two attributes being name and int
     {
         _members.Add(new Member(name, age));       // Returns the list so other methods can read it, but they cannot add to the list using this. Example of encapsulation to protect data structure
+    }
+      LEGACY_CODE   */
+    
+    public void AddMember(string name, int age)     // Creating a new AddMember method with filters, validation occurs before object generation in new version
+                                                    // This way the service controls the domain integrity.
+    {
+        if (string.IsNullOrWhiteSpace(name))        // Prevents name being blank
+        {
+            throw new ArgumentException("Name cannot be empty.");   // Throws a useful and readable exception
+        }
+
+        if (age < 16)          // Age must be at least 16 or higher
+        {
+            throw new ArgumentException("Member must be at least 16 years of age.");    // Throws a useful and readable exception
+        }
+
+        var member = new Member(name.Trim(), age);
+        _members.Add(member);        // Returns the private member list for other methods to use
     }
 
     public IReadOnlyList<Member> GetAllMembers()    // Create a, public, list which conatains all members
