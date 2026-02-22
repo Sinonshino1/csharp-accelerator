@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymMemberManager.Tests", "GymMemberManager.Tests\GymMemberManager.Tests.csproj", "{2CBC1FBB-2A21-4598-8EC4-3BC70521C15C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fundamentals", "Fundamentals\Fundamentals.csproj", "{C948AA61-5ED3-4EAE-A66B-6921E8FCAABC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2CBC1FBB-2A21-4598-8EC4-3BC70521C15C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CBC1FBB-2A21-4598-8EC4-3BC70521C15C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CBC1FBB-2A21-4598-8EC4-3BC70521C15C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CBC1FBB-2A21-4598-8EC4-3BC70521C15C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C948AA61-5ED3-4EAE-A66B-6921E8FCAABC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C948AA61-5ED3-4EAE-A66B-6921E8FCAABC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C948AA61-5ED3-4EAE-A66B-6921E8FCAABC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C948AA61-5ED3-4EAE-A66B-6921E8FCAABC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
