@@ -5,6 +5,7 @@ using System.Collections.Generic;   // Imports this so we can access the namespa
 
 using GymMemberManager.Models;
 using GymMemberManager.Services;
+using GymMemberManager.Domain.Exceptions;
 
 namespace GymMemberManager;     // Usually, the name takes after the .csproj name, however, Fundamentals is unclear context here
 
@@ -89,9 +90,13 @@ internal class Program      // Creates the Program class, which is used as an en
             memberService.AddMember(name, age);               // Unsure
             Console.WriteLine("Member successfully added!");    // Verification for the user that the new member was added successfully       
         }
-        catch (ArgumentException ex)
+        catch (InvalidMemberNameException ex)
         {
-            Console.WriteLine($"Error: {ex.Message}");   // Prints our custom ArguementException to the console.
+            Console.WriteLine($"Error: {ex.Message}");   // Prints our custom InvalidMemberNameException to the console.
+        }
+        catch (InvalidMemberAgeException ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");   // // Prints our custom InvalidMemberAgeException to the console.
         }
     }       
 

@@ -1,10 +1,12 @@
-using GymMemberManager.Services;
-using Xunit;
+using GymMemberManager.Services;        // We need access to our service in ordeer to run the tests against it, but we do not require our UI
+using Xunit;        // Use Xunit for unit tests
+
+using GymMemberManager.Domain.Exceptions;    // Provides access to the domain exceptions
 // Getting the dependancies
 
 namespace GymMemberManager.Tests;    // Create the local namespace
 
-public class MemberServiceTests
+public class MemberServiceTests     // We create a class which will contain all of the tests we are going to use
 {
     [Fact]
     public void AddMember_ValidInput_AddsMemberSuccessfully()
@@ -24,7 +26,7 @@ public class MemberServiceTests
     {
         var service = new MemberService();
 
-        Assert.Throws<ArgumentException>(() => 
+        Assert.Throws<InvalidMemberNameException>(() => 
             service.AddMember("", 25));
     }
 
@@ -33,7 +35,7 @@ public class MemberServiceTests
     {
         var service = new MemberService();
 
-        Assert.Throws<ArgumentException>(() => 
+        Assert.Throws<InvalidMemberAgeException>(() => 
             service.AddMember("Ben", 15));
     }
 

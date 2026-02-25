@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;    // Imported to access the namespace in order to use specific functions
                                      // Used for List and IReadOnlyList
 using GymMemberManager.Models;       // Provides access to the Models namespace
+using GymMemberManager.Domain.Exceptions;    // Provides access to all domain exceptions
 
 namespace GymMemberManager.Services;  // Creates the Services namespace, // Usually, the name takes after the .csproj name, however, Fundamentals is unclear context here
 
@@ -21,12 +22,14 @@ public class MemberService      // Create the MemberService class
     {
         if (string.IsNullOrWhiteSpace(name))        // Prevents name being blank
         {
-            throw new ArgumentException("Name cannot be empty.");   // Throws a useful and readable exception
+        // LEGACY    throw new ArgumentException("Name cannot be empty.");   // Throws a useful and readable exception
+            throw new InvalidMemberNameException(); // Makes use of our new domain exception
         }
 
         if (age < 16)          // Age must be at least 16 or higher
         {
-            throw new ArgumentException("Member must be at least 16 years of age.");    // Throws a useful and readable exception
+        // LEGACY    throw new ArgumentException("Member must be at least 16 years of age.");    // Throws a useful and readable exception
+            throw new InvalidMemberAgeException(); // Makes use of our new domain exception
         }
 
         var member = new Member(name.Trim(), age);
