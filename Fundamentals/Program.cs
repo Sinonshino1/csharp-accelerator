@@ -26,7 +26,9 @@ internal class Program      // Creates the Program class, which is used as an en
             Console.WriteLine("\n--- Gym Member Manager ---");      // Console.WriteLine acts similar to Python's print function to display text to the terminal
             Console.WriteLine("1. Add Member");
             Console.WriteLine("2. List Members");
-            Console.WriteLine("3. Exit");
+            Console.WriteLine("3. Search Members");
+            Console.WriteLine("4. Remove Members");
+            Console.WriteLine("0. Exit");
             Console.Write("Select an option: ");
 
             string input = (Console.ReadLine() ?? "").Trim();      // Create a variable called input with a string datatype equal to the output of Console.ReadLine, also has the ?? "".Trim() to deal with CS8600 warnings
@@ -40,7 +42,13 @@ internal class Program      // Creates the Program class, which is used as an en
                     ListMembers(memberService);                   // Case 2 runs the ListMember function
                     break;
                 case "3":
-                    running = false;                // Case 3 sest the running variable to false, ending the while loop (closes the program)
+                    SearchMembers(memberService);                   // Case 3 runs the SearchMember function
+                    break;
+                case "4":
+                    RemoveMember(memberService);                   // Case 4 runs the RemoveMember function
+                    break;
+                case "0":
+                    running = false;                // Case 0 sets the running variable to false, ending the while loop (closes the program)
                     break;
                 default:
                     Console.WriteLine("Invalid option.");       // A default set to catch any error if user inputs anything which doesn't fit the expected results
@@ -114,6 +122,43 @@ internal class Program      // Creates the Program class, which is used as an en
         {
             Console.WriteLine(member);       // Writes the member object information to the terminal
         }
+    }
+
+    static void SearchMembers(MemberService memberService)
+    {
+        Console.Write("Enter name to search: ");
+        string query = (Console.ReadLine() ?? "").Trim();
+
+        var results = memberService.FindMembersByName(query);
+
+        if (!results.Any())
+        {
+            Console.WriteLine("No members found.");
+            return;
+        }
+
+        foreach (var member in results)
+        {
+            Console.WriteLine(member);
+        }
+    }
+
+    static void RemoveMember(MemberService memberService)
+    {
+        Console.Write("Enter Member ID to remove: ");
+        string input = Console.ReadLine() ?? "".Trim();
+
+        if (!Guid.TryParse(input, out Guid id))
+        {
+            Console.WriteLine("Invalid GUID format.");
+            return;
+        }
+
+        bool removed = memberService.RemoveMember(id);
+
+        Console.WriteLine(removed
+            ? "Member removed successfully."
+            : "Member not found.");
     }
 }
 

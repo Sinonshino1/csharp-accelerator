@@ -17,8 +17,9 @@ public class MemberService      // Create the MemberService class
     }
       LEGACY_CODE   */
     
-    public void AddMember(string name, int age)     // Creating a new AddMember method with filters, validation occurs before object generation in new version
+    public Guid AddMember(string name, int age)     // Creating a new AddMember method with filters, validation occurs before object generation in new version
                                                     // This way the service controls the domain integrity.
+                                                    // Replace void with Guid
     {
         if (string.IsNullOrWhiteSpace(name))        // Prevents name being blank
         {
@@ -32,13 +33,36 @@ public class MemberService      // Create the MemberService class
             throw new InvalidMemberAgeException(); // Makes use of our new domain exception
         }
 
-        var member = new Member(name.Trim(), age);
+        var member = new Member(Guid.NewGuid(), name.Trim(), age);   // added in function to generate a new user ID
         _members.Add(member);        // Returns the private member list for other methods to use
+        return member.Id;             // Now returns the value of the new member's ID
     }
 
-    public IReadOnlyList<Member> GetAllMembers()    // Create a, public, list which conatains all members
+    public IReadOnlyList<Member> GetAllMembers()
     {
-        return _members.AsReadOnly();       // Returns all members in a read only format
+        return _members;
+    }
+
+    public IReadOnlyList<Member> FindMembersByName(string query)    // Create a public list which has a search filter input field
+    {
+        if (string.IsNullOrWhiteSpace(query))       // If earch bar is empty
+        {
+            return Array.Empty<Member>();       // Return an empty list
+        }
+
+        var q = query.Trim();       // Create a variable q to store the query search        
+        return _members
+            .Where(m => m.Name.Contains(q, StringComparison.OrdinalIgnoreCase))    // No idea what this does, why is it not in curly brackets?
+            .ToList();      // No idea what this does
+    }
+
+    public bool RemoveMember(Guid Id)       // Add the method to remove members
+    {
+        var index = _members.FindIndex(m => m.Id == Id);    //creates a variable to store the member index
+        if (index < 0) return false;
+
+        _members.RemoveAt(index);
+        return true;         // If the member removal worked as intended
     }
 
     public bool HasMembers()        // Creates a public boolean value showing if there are any members
