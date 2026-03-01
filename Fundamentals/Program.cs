@@ -6,6 +6,7 @@ using System.Collections.Generic;   // Imports this so we can access the namespa
 using GymMemberManager.Models;
 using GymMemberManager.Services;
 using GymMemberManager.Domain.Exceptions;
+using GymMemberManager.Repositories;
 
 namespace GymMemberManager;     // Usually, the name takes after the .csproj name, however, Fundamentals is unclear context here
 
@@ -16,7 +17,8 @@ internal class Program      // Creates the Program class, which is used as an en
     static void Main(string[] args)         // Creating the overarching program which will be being run, args refers to command line arguments
 
     {
-        var memberService = new MemberService();    // This creates a new variable object within the Program class called MemberService
+        var repo = new JsonMemberRepository("Data/members.json");
+        var memberService = new MemberService(repo);    // This creates a new variable object within the Program class called MemberService
 
 
         bool running = true;       // Create a bool variable and set it to true

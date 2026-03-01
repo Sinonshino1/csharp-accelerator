@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;       // Required to make use of a Json constructor
+
 namespace GymMemberManager.Models;       // Creates the Models namespace, usually, the name takes after the .csproj name, however, Fundamentals is unclear context here
 
 public class Member        // Creates the Member class, so we can have member objects to list in the other methods / store member objects
@@ -6,7 +8,16 @@ public class Member        // Creates the Member class, so we can have member ob
     public string Name { get; }     // Set a public scope, string property called Name. The { get } means that it is a read only variable, nad can't be adjusted outside of the constructor
     public int Age { get; }     // Set a public scope, int property called Age. Takes the string value submitted in the console and converts it to an int value.
 
-    public Member(Guid id, string name, int age)     // Set a public scope Object called Member with attributes name and int, with no methods
+/*  public Member(Guid id, string name, int age)     // Set a public scope Object called Member with attributes name and int, with no methods
+    {
+        Id = id;
+        Name = name;
+        Age = age;
+    }
+*/   // LEGACY CODE
+
+    [JsonConstructor]       // This is creating a a Json Contructor, to be able to input new member Json data into our Json file 
+    public Member(Guid id, string name, int age)    // Has the same arguments as the current member class, as contains the same data
     {
         Id = id;
         Name = name;

@@ -3,12 +3,14 @@ using System.Collections.Generic;    // Imported to access the namespace in orde
                                      // Used for List and IReadOnlyList
 using GymMemberManager.Models;       // Provides access to the Models namespace
 using GymMemberManager.Domain.Exceptions;    // Provides access to all domain exceptions
+using GymMemberManager.Repositories;        // Provides access to the Json storage and manipulation
 
 namespace GymMemberManager.Services;  // Creates the Services namespace, // Usually, the name takes after the .csproj name, however, Fundamentals is unclear context here
 
 public class MemberService      // Create the MemberService class
 {
-    private readonly List<Member> _members = new();     // Create a new, private, read-only members list, meaning they cannot be reassigned to a new list, but can be modified
+    private readonly IMemberRepository _repo;       // Allows the service to access the Json repo
+    private readonly List<Member> _members;     // read-only members list, meaning they cannot be reassigned to a new list, but can be modified
 
     /*
     public void AddMember(string name, int age)     // Create a, public, AddMember method with two attributes being name and int
@@ -35,7 +37,14 @@ public class MemberService      // Create the MemberService class
 
         var member = new Member(Guid.NewGuid(), name.Trim(), age);   // added in function to generate a new user ID
         _members.Add(member);        // Returns the private member list for other methods to use
+        _repo.Save(_members);
         return member.Id;             // Now returns the value of the new member's ID
+    }
+
+    public MemberService(IMemberRepository repo)
+    {
+        _repo = repo;
+        _members = _repo.Load().ToList();
     }
 
     public IReadOnlyList<Member> GetAllMembers()
@@ -62,6 +71,7 @@ public class MemberService      // Create the MemberService class
         if (index < 0) return false;
 
         _members.RemoveAt(index);
+        _repo.Save(_members);
         return true;         // If the member removal worked as intended
     }
 

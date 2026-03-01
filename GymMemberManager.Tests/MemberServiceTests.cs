@@ -12,7 +12,8 @@ public class MemberServiceTests     // We create a class which will contain all 
     public void AddMember_ValidInput_AddsMemberSuccessfully()
     {
         // Arrange
-        var service = new MemberService();      // Create a new service to run tests
+        var repo = new InMemoryMemberRepository();
+        var service = new MemberService(repo);      // Create a new service to run tests
 
         // Act
         service.AddMember("Ben", 25);       // Create a member to run tests on
@@ -24,7 +25,8 @@ public class MemberServiceTests     // We create a class which will contain all 
     [Fact]
     public void AddMember_BlankName_ThrowsArgumentException()
     {
-        var service = new MemberService();
+        var repo = new InMemoryMemberRepository();
+        var service = new MemberService(repo);
 
         Assert.Throws<InvalidMemberNameException>(() => 
             service.AddMember("", 25));
@@ -33,7 +35,8 @@ public class MemberServiceTests     // We create a class which will contain all 
     [Fact]
     public void AddMember_Underage_ThrowsArgumentException()
     {
-        var service = new MemberService();
+        var repo = new InMemoryMemberRepository();
+        var service = new MemberService(repo);
 
         Assert.Throws<InvalidMemberAgeException>(() => 
             service.AddMember("Ben", 15));
@@ -42,7 +45,8 @@ public class MemberServiceTests     // We create a class which will contain all 
     [Fact]
     public void AddMember_NameIsTrimmedBeforeStoring()
     {
-        var service = new MemberService();
+        var repo = new InMemoryMemberRepository();
+        var service = new MemberService(repo);
 
         service.AddMember("Ben", 25);
 
@@ -54,7 +58,8 @@ public class MemberServiceTests     // We create a class which will contain all 
     [Fact]
     public void AddMember_ReturnsId()
     {
-        var service = new MemberService();
+        var repo = new InMemoryMemberRepository();
+        var service = new MemberService(repo);
 
         var id = service.AddMember("Ben", 25);
 
@@ -64,7 +69,8 @@ public class MemberServiceTests     // We create a class which will contain all 
     [Fact]
     public void RemoveMember_ExistingId_ReturnsTrueAndRemoves()
     {
-        var service = new MemberService();
+        var repo = new InMemoryMemberRepository();
+        var service = new MemberService(repo);
 
         var id = service.AddMember("Ben", 25);
 
@@ -78,7 +84,8 @@ public class MemberServiceTests     // We create a class which will contain all 
     [Fact]
     public void RemoveMember_UnknownId_ReturnsFalse()
     {
-        var service = new MemberService();
+        var repo = new InMemoryMemberRepository();
+        var service = new MemberService(repo);
 
         var removed = service.RemoveMember(Guid.NewGuid());
 
@@ -88,7 +95,8 @@ public class MemberServiceTests     // We create a class which will contain all 
     [Fact]
     public void FindMembersByName_IsCaseInsensitiveAndPartial()
     {
-        var service = new MemberService();
+        var repo = new InMemoryMemberRepository();
+        var service = new MemberService(repo);
 
         service.AddMember("Ben Field", 25);
         service.AddMember("Benny", 30);
